@@ -22,8 +22,8 @@ A Python tool that converts Google Timeline JSON exports into CRA-compliant vehi
 
 1. Clone this repository:
 ```bash
-git clone https://github.com/yourusername/timeline-to-logbook.git
-cd timeline-to-logbook
+git clone https://github.com/BananaRama123/Timeline2Sheets
+cd timeline2sheets
 ```
 
 2. Install dependencies:
