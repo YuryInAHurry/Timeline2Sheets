@@ -1260,10 +1260,10 @@ def main():
     # ========== CONFIGURATION ==========
     
     # Google API Credentials
-    GOOGLE_MAPS_API_KEY = "AIzaSyALmRMO-9fGx0CA70mz2bzZ-88xGtlZ-Cg"
+    GOOGLE_MAPS_API_KEY = "YOUR-MAPS-API-KEY"
     SHEETS_CREDENTIALS_PATH = "credentials.json"
-    SPREADSHEET_ID = "1b9fu-FHPFcpl90oVxk2N6QSiCgtDix7e3HHJBsrtCD0"
-    SERVICE_ACCOUNT_EMAIL = "timeline-converter@pivotal-biplane-478015-s0.iam.gserviceaccount.com"
+    SPREADSHEET_ID = "YOUR-SPREADSHEET-ID"
+    SERVICE_ACCOUNT_EMAIL = "your-service-account@email"
     
     # JSON File Settings
     TIMELINE_JSON_PATH = "Timeline2024-2025.json"  # Your JSON file
