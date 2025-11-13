@@ -49,7 +49,7 @@ class CompleteTimelinePipeline:
         if place_id in self.geocode_cache:
             return self.geocode_cache[place_id]
         
-        url = "https://maps.googleapis.com/maps/api/geocode/json"
+        url = "https://maps.googleapis.com/maps/api/place/details/json"
         params = {
             'place_id': place_id,
             'key': self.maps_api_key
@@ -60,8 +60,9 @@ class CompleteTimelinePipeline:
             response.raise_for_status()
             data = response.json()
             
-            if data['status'] == 'OK' and data['results']:
-                result = data['results'][0]
+            # Changed: data['result'] instead of data['results'][0]
+            if data['status'] == 'OK' and 'result' in data:
+                result = data['result']  # Single object, not array
                 address_info = {
                     'formatted_address': result.get('formatted_address', ''),
                     'name': result.get('name', ''),
@@ -87,12 +88,13 @@ class CompleteTimelinePipeline:
                 time.sleep(0.1)
                 return address_info
             else:
+                print(f"  ⚠️ API Status: {data.get('status')}, Error: {data.get('error_message', 'N/A')}")
                 return {'formatted_address': f'Unknown Place ID', 'place_id': place_id}
                 
         except Exception as e:
             print(f"  ❌ Error geocoding {place_id}: {e}")
             return {'formatted_address': f'Error resolving address', 'place_id': place_id}
-    
+        
     def reverse_geocode_coords(self, lat: float, lng: float) -> str:
         """Reverse geocode coordinates to an address"""
         cache_key = f"{lat:.6f},{lng:.6f}"
@@ -783,7 +785,7 @@ class CompleteTimelinePipeline:
         # Example cities for "Travel to Customer Site"
         # Replace these with your actual customer site cities
         customer_site_cities = [
-            'city1', 'city2', 'city3', 'city4', 'city5',
+            'Tiverton', 'Port Elgin', 'Kincardine', 'city4', 'city5',
             'city6', 'city7', 'city8', 'city9', 'city10'
         ]
         
@@ -1239,7 +1241,7 @@ class CompleteTimelinePipeline:
         
         # Odometer settings - change these if needed
         ODOMETER_END_DATE = "2025-10-01"  # Date of known odometer reading
-        ODOMETER_END_READING = 150000      # Odometer reading on that date (example: 150,000 km)
+        ODOMETER_END_READING = 60000      # Odometer reading on that date (example: 150,000 km)
         
         self.write_final_report(final_report, "Final Report", ODOMETER_END_DATE, ODOMETER_END_READING)
         
@@ -1258,18 +1260,18 @@ def main():
     # ========== CONFIGURATION ==========
     
     # Google API Credentials
-    GOOGLE_MAPS_API_KEY = "YOUR_GOOGLE_MAPS_API_KEY_HERE"
+    GOOGLE_MAPS_API_KEY = "AIzaSyALmRMO-9fGx0CA70mz2bzZ-88xGtlZ-Cg"
     SHEETS_CREDENTIALS_PATH = "credentials.json"
-    SPREADSHEET_ID = "YOUR_GOOGLE_SHEET_ID_HERE"
-    SERVICE_ACCOUNT_EMAIL = "your-service-account@your-project-id.iam.gserviceaccount.com"
+    SPREADSHEET_ID = "1b9fu-FHPFcpl90oVxk2N6QSiCgtDix7e3HHJBsrtCD0"
+    SERVICE_ACCOUNT_EMAIL = "timeline-converter@pivotal-biplane-478015-s0.iam.gserviceaccount.com"
     
     # JSON File Settings
-    TIMELINE_JSON_PATH = "Timelinechunk.json"  # Your JSON file
-    SKIP_JSON_IMPORT = True  # Set to True if you already imported JSON and just want to process
+    TIMELINE_JSON_PATH = "Timeline2024-2025.json"  # Your JSON file
+    SKIP_JSON_IMPORT = False  # Set to True if you already imported JSON and just want to process
     
     # Processing Settings
     RESOLVE_ACTIVITIES = False  # Set to True to reverse geocode activity locations (slower, more API calls)
-    START_DATE = "2024-09-30"  # Fiscal year start
+    START_DATE = "2024-10-01"  # Fiscal year start
     END_DATE = "2025-10-01"    # Fiscal year end
     
     # ===================================
