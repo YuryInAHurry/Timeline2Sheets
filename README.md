@@ -34,6 +34,7 @@ pip install -r requirements.txt
 3. Set up your credentials:
    - Place your Google service account JSON in the project directory as `credentials.json`
    - Get a Google Maps API key from [Google Cloud Console](https://console.cloud.google.com/)
+   - Add your IP Address to Maps Platform API Key in Application restrictions or temporary remove all restrictions
 
 ## Configuration
 
