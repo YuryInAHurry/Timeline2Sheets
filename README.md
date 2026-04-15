@@ -33,7 +33,7 @@ pip install -r requirements.txt
 
 3. Set up your credentials:
    - Place your Google service account JSON in the project directory as `credentials.json`
-   - Get a Google Maps API key from [Google Cloud Console](https://console.cloud.google.com/)
+   - Get a Google Maps API key from [Google Cloud Console](https://console.cloud.google.com/). Note: it should include **Geocoding API** and **Places API**
    - Add your IP Address to Maps Platform API Key in Application restrictions or temporary remove all restrictions
 
 ## Configuration
@@ -68,6 +68,12 @@ ODOMETER_END_READING = 172000      # Odometer reading on that date
 3. Choose JSON format
 4. Download and extract the Timeline data
 
+#### Alternatively do it from your phone
+1.	Go to the phone Settings
+2.	Select *Location->Location Services->Time Line->Export Timeline Data*
+3.	Pick a folder and filename to export to.
+4.	Copy the resulting file to your computer.
+   
 ### Step 2: Share Your Google Sheet
 
 Share your Google Sheet with the service account email:
